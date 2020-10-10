@@ -1,0 +1,105 @@
+﻿@model TimeTracker.Models.Class.Modulos
+<div class="content-wrapper" style="min-height: 956px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Control de Modulos
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4">
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Nuevo Modulo</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" action="../Home/Modulos" method="post">
+                        <input type="hidden" id="ModuloId" name="ModuloId" value="@Model.ModuloId" />
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="Nombre" class="col-sm-2 control-label">Nombre</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre" value="@Model.Nombre" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="TagHTML" class="col-sm-2 control-label">TagHTML</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="TagHTML" name="TagHTML" placeholder="TagHTML" value="@Model.TagHTML" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Activo) Activo
+                                            @*<input type="checkbox" id="Activo" name="Activo" @(Model.Activo == true ? "checked" : "")> Activo*@
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="reset" class="btn btn-default" value="Cancelar" id="reset" />
+                            <button type="submit" class="btn btn-info pull-right">Guardar</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+
+
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Modulos</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>TagHTML</th>
+                                    <th>Estado</th>
+                                    <th>Editar</th>
+                                </tr>
+                                @foreach (var item in Model.ListaDeModulos)
+                                {
+                            <tr>
+                                <td>@item.ModuloId</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.TagHTML</td>
+                                <td>@(item.Activo == true ? "Si" : "No")</td>
+                                <td><a href="../Home/Modulos?moduloId=@item.ModuloId" class="btn btn-outline-info">Editar</a></td>
+                            </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    document.getElementById("reset").addEventListener("click", () => {
+        window.location = window.location.pathname;
+    });
+</script>

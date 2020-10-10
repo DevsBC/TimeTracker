@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TemplateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accesos">
+          <Key>
+            <PropertyRef Name="AccesoId" />
+          </Key>
+          <Property Name="AccesoId" Type="int" Nullable="false" />
+          <Property Name="RolId" Type="int" />
+          <Property Name="ModuloId" Type="int" />
+          <Property Name="CreadoEn" Type="smalldatetime" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificadoEn" Type="smalldatetime" />
+          <Property Name="ModificadoPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Etiquetas">
+          <Key>
+            <PropertyRef Name="EtiquetaId" />
+          </Key>
+          <Property Name="EtiquetaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modulos">
+          <Key>
+            <PropertyRef Name="ModuloId" />
+          </Key>
+          <Property Name="ModuloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="TagHTML" Type="varchar" MaxLength="250" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="CreadoEn" Type="smalldatetime" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificadoEn" Type="smalldatetime" />
+          <Property Name="ModificadorPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+          </Key>
+          <Property Name="ProyectoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registros">
+          <Key>
+            <PropertyRef Name="RegistroId" />
+          </Key>
+          <Property Name="RegistroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TareaId" Type="int" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="EtiquetaId" Type="int" Nullable="false" />
+          <Property Name="ProyectoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="CreadoEn" Type="smalldatetime" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificadoEn" Type="smalldatetime" />
+          <Property Name="ModificadoPor" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tareas">
+          <Key>
+            <PropertyRef Name="TareaId" />
+          </Key>
+          <Property Name="TareaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoraInicio" Type="smalldatetime" Nullable="false" />
+          <Property Name="HoraFinal" Type="smalldatetime" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="Facturable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="250" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="250" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="CreadoEn" Type="smalldatetime" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificadoEn" Type="smalldatetime" />
+          <Property Name="ModificadoPor" Type="int" />
+          <Property Name="RolId" Type="int" />
+          <Property Name="NombreDeUsuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Accesos_Modulos">
+          <End Role="Modulos" Type="Self.Modulos" Multiplicity="0..1" />
+          <End Role="Accesos" Type="Self.Accesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulos">
+              <PropertyRef Name="ModuloId" />
+            </Principal>
+            <Dependent Role="Accesos">
+              <PropertyRef Name="ModuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accesos_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Accesos" Type="Self.Accesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Accesos">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Etiquetas">
+          <End Role="Etiquetas" Type="Self.Etiquetas" Multiplicity="1" />
+          <End Role="Registros" Type="Self.Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etiquetas">
+              <PropertyRef Name="EtiquetaId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="EtiquetaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+          <End Role="Registros" Type="Self.Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Tareas">
+          <End Role="Tareas" Type="Self.Tareas" Multiplicity="1" />
+          <End Role="Registros" Type="Self.Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tareas">
+              <PropertyRef Name="TareaId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="TareaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Registros" Type="Self.Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TemplateModelStoreContainer">
+          <EntitySet Name="Accesos" EntityType="Self.Accesos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etiquetas" EntityType="Self.Etiquetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modulos" EntityType="Self.Modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registros" EntityType="Self.Registros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tareas" EntityType="Self.Tareas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accesos_Modulos" Association="Self.FK_Accesos_Modulos">
+            <End Role="Modulos" EntitySet="Modulos" />
+            <End Role="Accesos" EntitySet="Accesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accesos_Roles" Association="Self.FK_Accesos_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Accesos" EntitySet="Accesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Etiquetas" Association="Self.FK_Registros_Etiquetas">
+            <End Role="Etiquetas" EntitySet="Etiquetas" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Proyectos" Association="Self.FK_Registros_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Tareas" Association="Self.FK_Registros_Tareas">
+            <End Role="Tareas" EntitySet="Tareas" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Usuarios" Association="Self.FK_Registros_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TemplateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accesos">
+          <Key>
+            <PropertyRef Name="AccesoId" />
+          </Key>
+          <Property Name="AccesoId" Type="Int32" Nullable="false" />
+          <Property Name="RolId" Type="Int32" />
+          <Property Name="ModuloId" Type="Int32" />
+          <Property Name="CreadoEn" Type="DateTime" Precision="0" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificadoEn" Type="DateTime" Precision="0" />
+          <Property Name="ModificadoPor" Type="Int32" />
+          <NavigationProperty Name="Modulos" Relationship="Self.FK_Accesos_Modulos" FromRole="Accesos" ToRole="Modulos" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Accesos_Roles" FromRole="Accesos" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Modulos">
+          <Key>
+            <PropertyRef Name="ModuloId" />
+          </Key>
+          <Property Name="ModuloId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TagHTML" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="CreadoEn" Type="DateTime" Precision="0" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificadoEn" Type="DateTime" Precision="0" />
+          <Property Name="ModificadorPor" Type="Int32" />
+          <NavigationProperty Name="Accesos" Relationship="Self.FK_Accesos_Modulos" FromRole="Modulos" ToRole="Accesos" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="CreadoEn" Type="DateTime" Precision="0" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificadoEn" Type="DateTime" Precision="0" />
+          <Property Name="ModificadoPor" Type="Int32" />
+          <NavigationProperty Name="Accesos" Relationship="Self.FK_Accesos_Roles" FromRole="Roles" ToRole="Accesos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreadoEn" Type="DateTime" Precision="0" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificadoEn" Type="DateTime" Precision="0" />
+          <Property Name="ModificadoPor" Type="Int32" />
+          <Property Name="RolId" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="Registros" Relationship="TemplateModel.FK_Registros_Usuarios" FromRole="Usuarios" ToRole="Registros" />
+          <Property Name="NombreDeUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Accesos_Modulos">
+          <End Role="Modulos" Type="Self.Modulos" Multiplicity="0..1" />
+          <End Role="Accesos" Type="Self.Accesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulos">
+              <PropertyRef Name="ModuloId" />
+            </Principal>
+            <Dependent Role="Accesos">
+              <PropertyRef Name="ModuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accesos_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Accesos" Type="Self.Accesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Accesos">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accesos" EntityType="Self.Accesos" />
+          <EntitySet Name="Modulos" EntityType="Self.Modulos" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_Accesos_Modulos" Association="Self.FK_Accesos_Modulos">
+            <End Role="Modulos" EntitySet="Modulos" />
+            <End Role="Accesos" EntitySet="Accesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accesos_Roles" Association="Self.FK_Accesos_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Accesos" EntitySet="Accesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <EntitySet Name="Etiquetas" EntityType="TemplateModel.Etiquetas" />
+          <EntitySet Name="Proyectos" EntityType="TemplateModel.Proyectos" />
+          <EntitySet Name="Registros" EntityType="TemplateModel.Registros" />
+          <EntitySet Name="sysdiagrams" EntityType="TemplateModel.sysdiagrams" />
+          <EntitySet Name="Tareas" EntityType="TemplateModel.Tareas" />
+          <AssociationSet Name="FK_Registros_Etiquetas" Association="TemplateModel.FK_Registros_Etiquetas">
+            <End Role="Etiquetas" EntitySet="Etiquetas" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Proyectos" Association="TemplateModel.FK_Registros_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Tareas" Association="TemplateModel.FK_Registros_Tareas">
+            <End Role="Tareas" EntitySet="Tareas" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registros_Usuarios" Association="TemplateModel.FK_Registros_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Registros" EntitySet="Registros" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Etiquetas">
+          <Key>
+            <PropertyRef Name="EtiquetaId" />
+          </Key>
+          <Property Name="EtiquetaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registros" Relationship="TemplateModel.FK_Registros_Etiquetas" FromRole="Etiquetas" ToRole="Registros" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+          </Key>
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registros" Relationship="TemplateModel.FK_Registros_Proyectos" FromRole="Proyectos" ToRole="Registros" />
+        </EntityType>
+        <EntityType Name="Registros">
+          <Key>
+            <PropertyRef Name="RegistroId" />
+          </Key>
+          <Property Name="RegistroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TareaId" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="EtiquetaId" Type="Int32" Nullable="false" />
+          <Property Name="ProyectoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Etiquetas" Relationship="TemplateModel.FK_Registros_Etiquetas" FromRole="Registros" ToRole="Etiquetas" />
+          <NavigationProperty Name="Proyectos" Relationship="TemplateModel.FK_Registros_Proyectos" FromRole="Registros" ToRole="Proyectos" />
+          <NavigationProperty Name="Tareas" Relationship="TemplateModel.FK_Registros_Tareas" FromRole="Registros" ToRole="Tareas" />
+          <NavigationProperty Name="Usuarios" Relationship="TemplateModel.FK_Registros_Usuarios" FromRole="Registros" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tareas">
+          <Key>
+            <PropertyRef Name="TareaId" />
+          </Key>
+          <Property Name="TareaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoraInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HoraFinal" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Facturable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Registros" Relationship="TemplateModel.FK_Registros_Tareas" FromRole="Tareas" ToRole="Registros" />
+        </EntityType>
+        <Association Name="FK_Registros_Etiquetas">
+          <End Type="TemplateModel.Etiquetas" Role="Etiquetas" Multiplicity="1" />
+          <End Type="TemplateModel.Registros" Role="Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etiquetas">
+              <PropertyRef Name="EtiquetaId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="EtiquetaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Proyectos">
+          <End Type="TemplateModel.Proyectos" Role="Proyectos" Multiplicity="1" />
+          <End Type="TemplateModel.Registros" Role="Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Tareas">
+          <End Type="TemplateModel.Tareas" Role="Tareas" Multiplicity="1" />
+          <End Type="TemplateModel.Registros" Role="Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tareas">
+              <PropertyRef Name="TareaId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="TareaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registros_Usuarios">
+          <End Type="TemplateModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="TemplateModel.Registros" Role="Registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Registros">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TemplateModelStoreContainer" CdmEntityContainer="TimeTrackerEntities">
+          <EntitySetMapping Name="Accesos">
+            <EntityTypeMapping TypeName="TemplateModel.Accesos">
+              <MappingFragment StoreEntitySet="Accesos">
+                <ScalarProperty Name="AccesoId" ColumnName="AccesoId" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="ModuloId" ColumnName="ModuloId" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificadoEn" ColumnName="ModificadoEn" />
+                <ScalarProperty Name="ModificadoPor" ColumnName="ModificadoPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulos">
+            <EntityTypeMapping TypeName="TemplateModel.Modulos">
+              <MappingFragment StoreEntitySet="Modulos">
+                <ScalarProperty Name="ModuloId" ColumnName="ModuloId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TagHTML" ColumnName="TagHTML" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificadoEn" ColumnName="ModificadoEn" />
+                <ScalarProperty Name="ModificadorPor" ColumnName="ModificadorPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TemplateModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificadoEn" ColumnName="ModificadoEn" />
+                <ScalarProperty Name="ModificadoPor" ColumnName="ModificadoPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="TemplateModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificadoEn" ColumnName="ModificadoEn" />
+                <ScalarProperty Name="ModificadoPor" ColumnName="ModificadoPor" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etiquetas">
+            <EntityTypeMapping TypeName="TemplateModel.Etiquetas">
+              <MappingFragment StoreEntitySet="Etiquetas">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EtiquetaId" ColumnName="EtiquetaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proyectos">
+            <EntityTypeMapping TypeName="TemplateModel.Proyectos">
+              <MappingFragment StoreEntitySet="Proyectos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registros">
+            <EntityTypeMapping TypeName="TemplateModel.Registros">
+              <MappingFragment StoreEntitySet="Registros">
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="EtiquetaId" ColumnName="EtiquetaId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="TareaId" ColumnName="TareaId" />
+                <ScalarProperty Name="RegistroId" ColumnName="RegistroId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TemplateModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tareas">
+            <EntityTypeMapping TypeName="TemplateModel.Tareas">
+              <MappingFragment StoreEntitySet="Tareas">
+                <ScalarProperty Name="Facturable" ColumnName="Facturable" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="HoraFinal" ColumnName="HoraFinal" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="TareaId" ColumnName="TareaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

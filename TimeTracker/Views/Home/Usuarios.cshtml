@@ -1,0 +1,128 @@
+﻿@model TimeTracker.Models.Class.Usuarios
+<div class="content-wrapper" style="min-height: 956px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Control de Usuarios
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4">
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Nuevo Usuario</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" action="../Home/Usuarios" method="post">
+                        <input type="hidden" id="UsuarioId" name="UsuarioId" value="@Model.UsuarioId" />
+                        <input type="hidden" id="NombreDeUsuario" name="NombreDeUsuario" value="@Model.NombreDeUsuario">
+
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="Nombre" class="col-sm-2 control-label">Nombre</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre" value="@Model.Nombre" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ApellidoPaterno" class="col-sm-2 control-label">Apellido Paterno</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="ApellidoPaterno" name="ApellidoPaterno" placeholder="Apellido Paterno" value="@Model.ApellidoPaterno" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ApellidoMaterno" class="col-sm-2 control-label">Apellido Materno</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="ApellidoMaterno" name="ApellidoMaterno" placeholder="Apellido Materno" value="@Model.ApellidoMaterno" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Roles" class="col-sm-2 control-label">Rol</label>
+
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(model => model.RolId, Model.ListaDeRoles, "", new { @class = "form-control", @data_parsley_required = "true", id = "RolId", name = "RolId" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Activo) Activo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="reset" class="btn btn-default" value="Cancelar" id="reset" />
+                            <button type="submit" class="btn btn-info pull-right">Guardar</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+
+
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Usuarios</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Rol</th>
+                                    <th>Activo</th>
+                                    <th>Editar</th>
+                                </tr>
+                                @foreach (var item in Model.ListaDeUsuarios)
+                                {
+                            <tr>
+                                <td>@item.UsuarioId</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.NombreDeUsuario</td>
+                                <td>@item.ApellidoPaterno</td>
+                                <td>@item.ApellidoMaterno</td>
+                                <th>@item.NombreDelRol</th>
+                                <td>@(item.Activo == true ? "Si" : "No")</td>
+                                <td>
+                                <a href="../Home/usuarios?usuarioId=@item.UsuarioId" class="btn btn-outline-info">Editar</a> 
+                                <a href="../Home/EliminarUsuarios?usuarioId=@item.UsuarioId" class="btn btn-outline-danger">Eliminar</a> 
+                                </td>
+                            </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    document.getElementById("reset").addEventListener("click", () => {
+        window.location = window.location.pathname;
+    });
+</script>
