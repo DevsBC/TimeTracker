@@ -21,10 +21,10 @@ namespace TimeTracker.Models
         }
     
         public int TareaId { get; set; }
-        public System.DateTime HoraInicio { get; set; }
-        public System.DateTime HoraFinal { get; set; }
+        public Nullable<int> HoraInicio { get; set; }
+        public Nullable<int> HoraFinal { get; set; }
         public string Descripcion { get; set; }
-        public bool Facturable { get; set; }
+        public Nullable<bool> Facturable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Registros> Registros { get; set; }

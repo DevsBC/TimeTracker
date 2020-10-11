@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="53fdcd977c89485ea3aa1fbd852c809a" Name="Diagram1">
-        <EntityTypeShape EntityType="TemplateModel.Accesos" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TemplateModel.Modulos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TemplateModel.Roles" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TemplateModel.Usuarios" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="TemplateModel.FK_Accesos_Modulos" ManuallyRouted="false" />
-        <AssociationConnector Association="TemplateModel.FK_Accesos_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="TemplateModel.FK_Usuarios_Roles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="TemplateModel.Etiquetas" Width="1.5" PointX="3" PointY="12.625" />
-        <EntityTypeShape EntityType="TemplateModel.Proyectos" Width="1.5" PointX="3" PointY="1.375" />
-        <EntityTypeShape EntityType="TemplateModel.Registros" Width="1.5" PointX="5.25" PointY="8.375" />
-        <EntityTypeShape EntityType="TemplateModel.sysdiagrams" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="TemplateModel.Tareas" Width="1.5" PointX="3" PointY="15" />
-        <AssociationConnector Association="TemplateModel.FK_Registros_Etiquetas" />
-        <AssociationConnector Association="TemplateModel.FK_Registros_Proyectos" />
-        <AssociationConnector Association="TemplateModel.FK_Registros_Tareas" />
-        <AssociationConnector Association="TemplateModel.FK_Registros_Usuarios" />
+      <Diagram DiagramId="7d9ab30fc5194d4598850ea9c95bd049" Name="Diagram1">
+        <EntityTypeShape EntityType="TimeTrackerModel.Accesos" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Etiquetas" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Modulos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Proyectos" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Registros" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Roles" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Tareas" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeTrackerModel.Usuarios" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Accesos_Modulos" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Accesos_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Registros_Etiquetas" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Registros_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Registros_Tareas" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Registros_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeTrackerModel.FK_Usuarios_Roles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

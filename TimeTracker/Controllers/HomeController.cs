@@ -18,11 +18,23 @@ namespace TimeTracker.Controllers
         }
 
         [Authorize]
+
+        [HttpGet]
         public ActionResult Tracker(int? registroId)
         {
             var model = Funciones.GetRegistros(registroId);
             return View(model);
         }
+
+        [HttpPost]
+        public string Tracker(Registros registro)
+        {
+            var tarea = ActualizarTareas.Actualizar(registro);
+            var model = ActualizarRegistros.Actualizar(tarea);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(model);
+        }
+
+
 
         [Authorize]
         [HttpGet]

@@ -9,7 +9,7 @@ namespace TimeTracker.Models.Data
     { 
         public static Class.Roles Actualizar(Class.Roles model)
         {
-            var db = new TimeTrackerEntities();
+            var db = new TimeTrackerEntities1();
             if (model.RolId == null)
             {
                 var rolRecuperado = db.Roles.FirstOrDefault(x => x.Nombre == model.Nombre);

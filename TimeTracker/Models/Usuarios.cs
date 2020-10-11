@@ -33,8 +33,8 @@ namespace TimeTracker.Models
         public Nullable<int> RolId { get; set; }
         public string NombreDeUsuario { get; set; }
     
-        public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Registros> Registros { get; set; }
+        public virtual Roles Roles { get; set; }
     }
 }

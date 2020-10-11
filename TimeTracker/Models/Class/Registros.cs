@@ -9,8 +9,8 @@ namespace TimeTracker.Models.Class
 {
     public class Registros
     {
-        public int RegistroId { get; set; }
-        public int TareaId { get; set; }
+        public int? RegistroId { get; set; }
+        public int? TareaId { get; set; }
         public int UsuarioId { get; set; }
         public int EtiquetaId { get; set; }
         public int ProyectoId { get; set; }
@@ -20,9 +20,9 @@ namespace TimeTracker.Models.Class
         public List<Tareas> ListaDeTareas { get; set; }
         public string NombreDeProyecto { get; set; }
         public string NombreDeEtiqueta { get; set; }
-        public string DescripcionTarea { get; set; }
-        public DateTime HoraInicio { get; set; }
-        public DateTime HoraFinal { get; set; }
+        public string Descripcion { get; set; }
+        public int HoraInicio { get; set; }
+        public int HoraFinal { get; set; }
         public bool Facturable { get; set; }
 
 
