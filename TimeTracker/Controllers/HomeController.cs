@@ -31,9 +31,16 @@ namespace TimeTracker.Controllers
         {
             var tarea = ActualizarTareas.Actualizar(registro);
             var model = ActualizarRegistros.Actualizar(tarea);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(model);
+            return model;
         }
 
+        [HttpPost]
+        public string EliminarRegistro(int registroId)
+        {
+            ActualizarRegistros.Eliminar(registroId);
+            var model = Funciones.GetRegistros(registroId);
+            return model.ListaDeRegistros;
+        }
 
 
         [Authorize]

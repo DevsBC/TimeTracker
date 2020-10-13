@@ -81,8 +81,8 @@
             <PropertyRef Name="TareaId" />
           </Key>
           <Property Name="TareaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HoraInicio" Type="int" />
-          <Property Name="HoraFinal" Type="int" />
+          <Property Name="HoraInicio" Type="varchar" MaxLength="100" />
+          <Property Name="HoraFinal" Type="varchar" MaxLength="100" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" />
           <Property Name="Facturable" Type="bit" />
         </EntityType>
@@ -349,8 +349,8 @@
             <PropertyRef Name="TareaId" />
           </Key>
           <Property Name="TareaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HoraInicio" Type="Int32" />
-          <Property Name="HoraFinal" Type="Int32" />
+          <Property Name="HoraInicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HoraFinal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Facturable" Type="Boolean" />
           <NavigationProperty Name="Registros" Relationship="Self.FK_Registros_Tareas" FromRole="Tareas" ToRole="Registros" />
@@ -458,7 +458,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TimeTrackerEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TemplateEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accesos" EntityType="Self.Accesos" />
           <EntitySet Name="Etiquetas" EntityType="Self.Etiquetas" />
           <EntitySet Name="Modulos" EntityType="Self.Modulos" />
@@ -543,7 +543,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TimeTrackerModelStoreContainer" CdmEntityContainer="TimeTrackerEntities1">
+        <EntityContainerMapping StorageEntityContainer="TimeTrackerModelStoreContainer" CdmEntityContainer="TemplateEntities1">
           <EntitySetMapping Name="Accesos">
             <EntityTypeMapping TypeName="TimeTrackerModel.Accesos">
               <MappingFragment StoreEntitySet="Accesos">

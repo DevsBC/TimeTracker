@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TimeTracker.Models.Class;
+using TimeTracker.Models.Data;
+
 
 namespace TimeTracker.Models.Logic
 {
@@ -12,7 +14,7 @@ namespace TimeTracker.Models.Logic
         public static Class.Roles GetRoles(int? rolId)
         {
             var roles = new Class.Roles();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var listaRoles = new List<Class.Roles>();
 
             var rolesdb = db.Roles.ToList();
@@ -42,7 +44,7 @@ namespace TimeTracker.Models.Logic
         public static Class.Modulos GetModulos(int? moduloId)
         {
             var modulos = new Class.Modulos();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var listaModulos = new List<Class.Modulos>();
 
             var modulosdb = db.Modulos.ToList();
@@ -75,7 +77,7 @@ namespace TimeTracker.Models.Logic
         public static Class.Usuarios GetUsuarios(int? usuarioId)
         {
             var usuarios = new Class.Usuarios();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var listaUsuarios = new List<Class.Usuarios>();
 
             var usuariosdb = db.Usuarios.ToList();
@@ -112,7 +114,7 @@ namespace TimeTracker.Models.Logic
 
         public static string GetNombreRol(int? rolId)
         {
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var resultado = string.Empty;
             var rol = db.Roles.FirstOrDefault(x => x.RolId == rolId);
             if (rol != null)
@@ -125,7 +127,7 @@ namespace TimeTracker.Models.Logic
         public static List<SelectListItem> GetListaRoles()
         {
             var listaRoles = new List<SelectListItem>();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var roles = db.Roles.Where(x => x.Activo == true).ToList();
             foreach(var item in roles) {
                 listaRoles.Add(new SelectListItem
@@ -141,7 +143,7 @@ namespace TimeTracker.Models.Logic
         public static Class.Registros GetRegistros(int? registroId)
         {
             var registros = new Class.Registros();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var listaRegistros = new List<Class.Registros>();
 
             var registrosdb = db.Registros.ToList();
@@ -167,7 +169,7 @@ namespace TimeTracker.Models.Logic
                 registros.EtiquetaId = buscarRegistro.EtiquetaId;
                 registros.ProyectoId = buscarRegistro.ProyectoId;
             }
-            registros.ListaDeRegistros = listaRegistros;
+            registros.ListaDeRegistros = ActualizarRegistros.GetRegistrosDeUsuario(1016);
             registros.ListaDeEtiquetas = GetListaDeEtiquetas();
             registros.ListaDeProyectos = GetListaDeProyectos();
             registros.ListaDeTareas = GetListaDeTareas(registros.TareaId);
@@ -177,7 +179,7 @@ namespace TimeTracker.Models.Logic
         public static List<SelectListItem> GetListaDeEtiquetas()
         {
             var listaEtiquetas = new List<SelectListItem>();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var etiquetas = db.Etiquetas.ToList();
             foreach (var item in etiquetas)
             {
@@ -193,7 +195,7 @@ namespace TimeTracker.Models.Logic
         public static List<SelectListItem> GetListaDeProyectos()
         {
             var listaProyectos = new List<SelectListItem>();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var proyectos = db.Proyectos.ToList();
             foreach (var item in proyectos)
             {
@@ -209,7 +211,7 @@ namespace TimeTracker.Models.Logic
         public static List<Class.Tareas> GetListaDeTareas(int? tareaId)
         {
             var listaTareas = new List<Class.Tareas>();
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var tareas = db.Tareas.Where(x => x.TareaId == tareaId).ToList();
             if (tareas != null)
             {
@@ -230,7 +232,7 @@ namespace TimeTracker.Models.Logic
 
         public static bool? GetLoginUsuario(Login model)
         {
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             var usuario = db.Usuarios.FirstOrDefault(x => x.NombreDeUsuario == model.Usuario);
             if (usuario != null)
             {

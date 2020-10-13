@@ -21,8 +21,8 @@ namespace TimeTracker.Models
         }
     
         public int TareaId { get; set; }
-        public Nullable<int> HoraInicio { get; set; }
-        public Nullable<int> HoraFinal { get; set; }
+        public string HoraInicio { get; set; }
+        public string HoraFinal { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> Facturable { get; set; }
     

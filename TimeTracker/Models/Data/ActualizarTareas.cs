@@ -10,7 +10,7 @@ namespace TimeTracker.Models.Data
     {
         public static Class.Registros Actualizar(Class.Registros model)
         {
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             if (model.TareaId == null)
             {
                 var nuevaTarea = db.Tareas.Create();
@@ -37,8 +37,8 @@ namespace TimeTracker.Models.Data
 
         public static bool Eliminar(int tareaId)
         {
-            var db = new TimeTrackerEntities1();
-            using (var ctx = new TimeTrackerEntities1())
+            var db = new TemplateEntities1();
+            using (var ctx = new TemplateEntities1())
             {
                 var usuario = db.Tareas.FirstOrDefault(x => x.TareaId == tareaId);
                 if (usuario != null)

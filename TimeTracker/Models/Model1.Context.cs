@@ -15,10 +15,10 @@ namespace TimeTracker.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TimeTrackerEntities1 : DbContext
+    public partial class TemplateEntities1 : DbContext
     {
-        public TimeTrackerEntities1()
-            : base("name=TimeTrackerEntities1")
+        public TemplateEntities1()
+            : base("name=TemplateEntities1")
         {
         }
     

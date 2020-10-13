@@ -11,7 +11,7 @@ namespace TimeTracker.Models.Data
     {
         public static Class.Usuarios Actualizar(Class.Usuarios model)
         {
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             if (model.UsuarioId == null)
             {
                 var usuarioRecuperado = db.Usuarios.FirstOrDefault(x => x.Nombre == model.Nombre);
@@ -68,8 +68,8 @@ namespace TimeTracker.Models.Data
 
         public static bool Eliminar(int usuarioId)
         {
-            var db = new TimeTrackerEntities1();
-            using(var ctx = new TimeTrackerEntities1())
+            var db = new TemplateEntities1();
+            using(var ctx = new TemplateEntities1())
             {
                 var usuario = db.Usuarios.FirstOrDefault(x => x.UsuarioId == usuarioId);
                 if (usuario != null)

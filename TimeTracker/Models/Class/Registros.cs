@@ -16,13 +16,13 @@ namespace TimeTracker.Models.Class
         public int ProyectoId { get; set; }
         public List<SelectListItem> ListaDeProyectos { get; set; }
         public List<SelectListItem> ListaDeEtiquetas { get; set; }
-        public List<Registros> ListaDeRegistros { get; set; }
+        public string ListaDeRegistros { get; set; }
         public List<Tareas> ListaDeTareas { get; set; }
         public string NombreDeProyecto { get; set; }
         public string NombreDeEtiqueta { get; set; }
         public string Descripcion { get; set; }
-        public int HoraInicio { get; set; }
-        public int HoraFinal { get; set; }
+        public string HoraInicio { get; set; }
+        public string HoraFinal { get; set; }
         public bool Facturable { get; set; }
 
 

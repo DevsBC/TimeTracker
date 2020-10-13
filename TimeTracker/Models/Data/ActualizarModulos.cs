@@ -10,7 +10,7 @@ namespace TimeTracker.Models.Data
     {
         public static Class.Modulos Actualizar(Class.Modulos model)
         {
-            var db = new TimeTrackerEntities1();
+            var db = new TemplateEntities1();
             if (model.ModuloId == null)
             {
                 var moduloRecuperado = db.Modulos.FirstOrDefault(x => x.Nombre == model.Nombre);
