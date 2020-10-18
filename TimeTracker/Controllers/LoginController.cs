@@ -19,6 +19,12 @@ namespace TimeTracker.Controllers
             return View(model);
         }
 
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("~/Login/Index");
+        }
+
         [HttpPost]
         public ActionResult Index(Login model)
         {
@@ -26,7 +32,8 @@ namespace TimeTracker.Controllers
             if (response == true)
             {
                 FormsAuthentication.SetAuthCookie(model.Usuario, false);
-                return Redirect("~/Home/Index");
+                Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(model.Usuario));
+                return Redirect("~/Home/Tracker");
             }
             model.Error = "Usuario o Clave incorrectos";
             return View(model);

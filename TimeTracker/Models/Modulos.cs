@@ -28,6 +28,7 @@ namespace TimeTracker.Models
         public Nullable<int> CreadoPor { get; set; }
         public Nullable<System.DateTime> ModificadoEn { get; set; }
         public Nullable<int> ModificadorPor { get; set; }
+        public Nullable<int> id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Accesos> Accesos { get; set; }

@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TimeTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TimeTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accesos">
           <Key>
             <PropertyRef Name="AccesoId" />
           </Key>
-          <Property Name="AccesoId" Type="int" Nullable="false" />
+          <Property Name="AccesoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RolId" Type="int" />
           <Property Name="ModuloId" Type="int" />
           <Property Name="CreadoEn" Type="smalldatetime" />
@@ -36,6 +36,7 @@
           <Property Name="CreadoPor" Type="int" />
           <Property Name="ModificadoEn" Type="smalldatetime" />
           <Property Name="ModificadorPor" Type="int" />
+          <Property Name="id" Type="int" />
         </EntityType>
         <EntityType Name="Proyectos">
           <Key>
@@ -257,8 +258,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TimeTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -297,6 +297,7 @@
           <Property Name="ModificadoEn" Type="DateTime" Precision="0" />
           <Property Name="ModificadorPor" Type="Int32" />
           <NavigationProperty Name="Accesos" Relationship="Self.FK_Accesos_Modulos" FromRole="Modulos" ToRole="Accesos" />
+          <Property Name="id" Type="Int32" />
         </EntityType>
         <EntityType Name="Proyectos">
           <Key>
@@ -568,6 +569,7 @@
           <EntitySetMapping Name="Modulos">
             <EntityTypeMapping TypeName="TimeTrackerModel.Modulos">
               <MappingFragment StoreEntitySet="Modulos">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ModuloId" ColumnName="ModuloId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="TagHTML" ColumnName="TagHTML" />

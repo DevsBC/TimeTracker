@@ -8,6 +8,7 @@ namespace TimeTracker.Models.Class
     public class Modulos
     {
         public int? ModuloId { set; get; }
+        public int? RolId { set; get; }
 
         public string Nombre { set; get; }
 

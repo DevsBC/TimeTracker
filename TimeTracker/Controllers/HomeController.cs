@@ -14,6 +14,18 @@ namespace TimeTracker.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            if (Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name)).Contains(0))
+            {
+                return View();
+            } 
+            else
+            {
+                return Redirect("../Home/Restringido");
+            }
+        }
+
+        public ActionResult Restringido()
+        {
             return View();
         }
 
@@ -47,8 +59,16 @@ namespace TimeTracker.Controllers
         [HttpGet]
         public ActionResult Roles(int? rolId)
         {
-           var model = Funciones.GetRoles(rolId);
-           return View(model);
+           
+            if (Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name)).Contains(2))
+            {
+                var model = Funciones.GetRoles(rolId);
+                return View(model);
+            }
+             else        
+            {
+                return Redirect("../Home/Restringido");
+            }
         }
 
         [Authorize]
@@ -63,8 +83,16 @@ namespace TimeTracker.Controllers
         [HttpGet]
         public ActionResult Modulos(int? moduloId)
         {
-            var model = Funciones.GetModulos(moduloId);
-            return View(model); 
+            if (Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name)).Contains(4))
+            {
+                var model = Funciones.GetModulos(moduloId);
+                return View(model);
+            }
+            else
+            {
+                return Redirect("../Home/Restringido");
+            }
+
         }
 
         [Authorize]
@@ -79,6 +107,7 @@ namespace TimeTracker.Controllers
         [HttpGet]
         public ActionResult Usuarios(int? usuarioId)
         {
+            Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name));
             var model = Funciones.GetUsuarios(usuarioId);
             return View(model);
         }
@@ -87,18 +116,51 @@ namespace TimeTracker.Controllers
         [HttpPost]
         public ActionResult Usuarios(Usuarios model)
         {
-            model = ActualizarUsuarios.Actualizar(model);
-            return View(model);
+            if (Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name)).Contains(3))
+            {
+                model = ActualizarUsuarios.Actualizar(model);
+                return View(model);
+            }
+            else
+            {
+                return Redirect("../Home/Restringido");
+            }
+
         }
 
         [Authorize]
         public ActionResult EliminarUsuarios(int? usuarioId)
         {
+            Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name));
             ActualizarUsuarios.Eliminar(Convert.ToInt32(usuarioId));
             return Redirect("../Home/Usuarios?usuarioId=" + usuarioId);
         }
 
         [Authorize]
-        public ActionResult Accesos() => View();
+        [HttpGet]
+        public ActionResult Accesos(int? rolId)
+        {
+            if (Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name)).Contains(1))
+            {
+                var model = Funciones.GetListaAccesos(rolId);
+                return View(model);
+            }
+            else
+            {
+                return Redirect("../Home/Restringido");
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Accesos(ListaDeAccesos model)
+        {
+
+            model = ActualizarAccesos.Actualizar(model);
+            Funciones.GetRolDeUsuario(Funciones.GetIdDeUsuario(User.Identity.Name));
+            return View(model);
+            
+            
+        }
     }
 }
