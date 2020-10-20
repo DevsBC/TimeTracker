@@ -317,6 +317,7 @@ namespace TimeTracker.Models.Logic
             {
                 accesos.NombreRol = rol.Nombre;
                 accesos.RolId = rol.RolId;
+                accesos.Activo = Convert.ToBoolean(rol.Activo);
 
                 var listaAccessos = (from a in db.Accesos
                                      where a.RolId == rolId
@@ -324,6 +325,7 @@ namespace TimeTracker.Models.Logic
                                      {
                                          a.ModuloId,
                                      }).ToList();
+
                 var modulo = db.Modulos.Where(x => x.Activo == true).ToList();  
                 foreach (var item in modulo)
                 {
@@ -333,10 +335,20 @@ namespace TimeTracker.Models.Logic
                         ModuloId = item.ModuloId,
                         Checked = listaAccessos.FirstOrDefault(x => x.ModuloId == item.ModuloId) != null ? "checked" : string.Empty
                     });
+                }           
+            } 
+            else
+            {
+                var modulo = db.Modulos.Where(x => x.Activo == true).ToList();
+                foreach (var item in modulo)
+                {
+                    listaacceso.Add(new Class.Accesos
+                    {
+                        NombreDeModulo = item.Nombre,
+                        ModuloId = item.ModuloId,
+                        Checked = string.Empty
+                    });
                 }
-
-                
-                
             }
             accesos.LAccesos = listaacceso;
             accesos.LRoles = listaRoles;

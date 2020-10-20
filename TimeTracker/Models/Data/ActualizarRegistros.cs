@@ -92,5 +92,23 @@ namespace TimeTracker.Models.Data
                 return (registroHaSidoBorrado && tareaHaSidoBorrada);
             }
         }
+
+        public static bool Editar(int registroId, string descripcion)
+        {
+            var db = new TemplateEntities1();
+            var encontrarRegistro = db.Registros.FirstOrDefault(x => x.RegistroId == registroId);
+            if (encontrarRegistro != null)
+            {
+                var tareaId = encontrarRegistro.TareaId;
+                var encontrarTarea = db.Tareas.First(x => x.TareaId == tareaId);
+                encontrarTarea.Descripcion = descripcion;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

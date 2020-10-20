@@ -54,6 +54,14 @@ namespace TimeTracker.Controllers
             return model.ListaDeRegistros;
         }
 
+        [HttpPost]
+        public string EditarRegistro(int registroId, string descripcion)
+        {
+            ActualizarRegistros.Editar(registroId, descripcion);
+            var model = Funciones.GetRegistros(registroId);
+            return model.ListaDeRegistros;
+        }
+
 
         [Authorize]
         [HttpGet]

@@ -63,12 +63,12 @@
                                     <option value="@proyecto.Value">@proyecto.Text</option>
                                 }
                             </select>
-                            <div class="input-group mb-3">
+                            @*<div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-success" type="button" id="AgregarProyecto"><i class="fa fa-fw fa-plus"></i></button>
                                 </div>
                                 <input type="text" class="form-control" id="NuevoProyecto" placeholder="Nuevo Proyecto">
-                            </div>
+                            </div>*@
                         </td>
                         <td>
                             <select class="form-control" id="Etiquetas">
@@ -77,12 +77,12 @@
                                     <option value="@etiqueta.Value">@etiqueta.Text</option>
                                 }
                             </select>
-                            <div class="input-group mb-3">
+                            @*<div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-success" type="button" id="AgregarEtiqueta"><i class="fa fa-fw fa-plus"></i></button>
                                 </div>
                                 <input type="text" class="form-control" id="NuevaEtiqueta" placeholder="Nueva Etiqueta">
-                            </div>
+                            </div>*@
                         </td>
                         <td>
                             <div class="custom-control custom-switch">
@@ -118,6 +118,8 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
+
+
 </div>
 
 <script src="../Content/jquery/jquery.min.js"></script>
@@ -285,14 +287,29 @@
                 }
             });
 
-            if (newDescription) {
-                editRegisterInDB(id, newDescription);
+            if (newDescription.isConfirmed) {
+                console.log(newDescription);
+                editRegisterInDB(id, newDescription.value);
             }
         });
 
         function editRegisterInDB(id, description) {
-            Swal.fire('Registro # '+ id + 'D: ' + description);
-
+            var register = { registroId: id, descripcion: description };
+            $.ajax({
+                method: 'post',
+                url: '../Home/EditarRegistro',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(register),
+                success: function (response) {
+                    Swal.fire(
+                        'Editado!',
+                        'El registro ' + id + ' se ha modificado',
+                        'success'
+                    );
+                    renderRegisters(response);
+                }
+            });
         }
 
         function getTime(timestamp) {

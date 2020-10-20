@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Time Tracker | ASP MVC</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -27,7 +27,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed layout-footer-fixed">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -44,12 +44,12 @@
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
+                        <i class="fas fa-power-off"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
                         <a href="../Login/Logout" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Logout
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
                             <span class="float-right text-muted text-sm">49 mins</span>
                         </a>
                     </div>
@@ -65,10 +65,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="../Home/Index" class="brand-link">
                 <img src="../Content/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Time Tracker</span>
             </a>
 
             <!-- Sidebar -->
@@ -79,32 +79,32 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">MENU</li>
                         <li class="nav-item">
-                            <a href="../Home/Tracker" id="Tracker" class="nav-link">
-                                <i class="far fa-circle nav-icon active"></i>
+                            <a href="../Home/Tracker" id="Tracker" class="nav-link active">
+                                <i class="far fa-clock nav-icon active"></i>
                                 <p>Time Tracker</p>
                             </a>
                         </li>
                         <li class="nav-item" id="Roles" style="display: none;">
                             <a href="../Home/Roles" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-user-tag nav-icon"></i>
                                 <p>Roles</p>
                             </a>
                         </li>
                         <li class="nav-item" id="Modulos" style="display: none;">
                             <a href="../Home/Modulos" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-layer-group nav-icon"></i>
                                 <p>Modulos</p>
                             </a>
                         </li>
                         <li class="nav-item" id="Accesos" style="display: none;">
                             <a href="../Home/Accesos" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-low-vision nav-icon"></i>
                                 <p>Accesos</p>
                             </a>
                         </li>
                         <li class="nav-item" id="Usuarios" style="display: none;">
                             <a href="../Home/Usuarios" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-users nav-icon"></i>
                                 <p>Usuarios</p>
                             </a>
                         </li>
@@ -118,10 +118,10 @@
         @RenderBody()
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://hvl-report.web.app">Juan Carlos Aranda Alonso</a>.</strong>
+            <strong>Copyright &copy; 2017-2020 <a href="http://hvl-report.web.app">Juan Carlos Aranda Alonso</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.9
+                <b>Version</b> 1.2.0
             </div>
         </footer>
 
